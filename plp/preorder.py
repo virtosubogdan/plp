@@ -26,3 +26,24 @@ def preorder(tree):
             rest.put(right)
         if left is not None:
             rest.put(left)
+
+
+class PreOrderIterator(object):
+    def __init__(self, tree):
+        self.rest = LifoQueue()
+        self.rest.put(tree)
+
+    def __iter__(self):
+        return self
+
+    def next(self):
+        if self.rest.empty():
+            raise StopIteration
+        root, left, right = self.rest.get()
+        if root is None:
+            raise StopIteration
+        if right is not None:
+            self.rest.put(right)
+        if left is not None:
+            self.rest.put(left)
+        return root
