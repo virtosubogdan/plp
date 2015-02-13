@@ -38,6 +38,12 @@ def flatten(list_a, list_b, max_depth):
     list_b[:] = rec_flatten(list_b, max_depth)
 
 
+def flatten_after_feedback(list_a, list_b, max_depth):
+    # Using suggested version
+    return (rec_flatten_without_exceptions(list_a, max_depth),
+            rec_flatten_without_exceptions(list_b, max_depth))
+
+
 if __name__ == "__main__":
     # poor man's unittests..
     assert (
