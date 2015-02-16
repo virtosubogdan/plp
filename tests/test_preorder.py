@@ -27,3 +27,6 @@ class TestPreOrder(unittest.TestCase):
                 ('z', ('c', None, None), ('zz', None, None)))
         self.assertEqual([x for x in PreOrderIterator(tree)],
                          ['b', 'a', 1, 2, 'z', 'c', 'zz'])
+
+if __name__ == '__main__':
+    unittest.main()

@@ -46,3 +46,6 @@ class TestSwap(unittest.TestCase):
     def test_duplicate_key(self):
         with self.assertRaises(IllegalArgument):
             swap({'a': Immutable(1), 1: Immutable(1)})
+
+if __name__ == '__main__':
+    unittest.main()

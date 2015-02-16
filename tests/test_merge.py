@@ -35,3 +35,6 @@ class TestMerge(unittest.TestCase):
     def test_illegal(self):
         with self.assertRaises(TypeError):
             merge((1, 2), (2, 3))
+
+if __name__ == '__main__':
+    unittest.main()

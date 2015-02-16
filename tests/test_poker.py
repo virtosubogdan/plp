@@ -23,3 +23,6 @@ class TestPoker(unittest.TestCase):
         dealer.remove_player(p1)
         dealer.stop_game()
         self.assertEqual(len(dealer.remove_deck().cards), 56)
+
+if __name__ == '__main__':
+    unittest.main()

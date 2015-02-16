@@ -20,3 +20,6 @@ def myfast():
 @time_slow(threshold=0.05)
 def myslow():
     sleep(0.5)
+
+if __name__ == '__main__':
+    unittest.main()

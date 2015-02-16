@@ -1,8 +1,8 @@
-from unittest import TestCase
+import unittest
 from plp.subset import subset
 
 
-class TestSubset(TestCase):
+class TestSubset(unittest.TestCase):
     def test_simple(self):
         base_set = {1, 2, 3}
         result = [x for x in subset(base_set)]
@@ -14,3 +14,6 @@ class TestSubset(TestCase):
         result = [x for x in subset(base_set)]
         expected = [base_set, {1}, {'a'}, set([])]
         self.assertItemsEqual(result, expected)
+
+if __name__ == '__main__':
+    unittest.main()

@@ -1,4 +1,4 @@
-from unittest import TestCase
+import unittest
 from plp.singleton import SingletonClass
 
 
@@ -14,7 +14,7 @@ class Single2(object):
         self.b = b
 
 
-class TestSingleton(TestCase):
+class TestSingleton(unittest.TestCase):
     def test_equal(self):
         self.assertTrue(Single() == Single())
 
@@ -23,3 +23,6 @@ class TestSingleton(TestCase):
         b = Single2('b', b=5)
         self.assertEqual(a.b, b.b)
         self.assertTrue(a == b)
+
+if __name__ == '__main__':
+    unittest.main()
