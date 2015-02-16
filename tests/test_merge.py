@@ -5,11 +5,15 @@ from plp.merge import merge
 
 class TestMerge(unittest.TestCase):
     def test_plp(self):
-        a = {'x': [1, 2, 3], 'y': 1, 'z': set([1, 2, 3]), 'w': 'qweqwe', 't': {'a': [1, 2]}, 'm': [1]}
-        b = {'x': [4, 5, 6], 'y': 4, 'z': set([4, 2, 3]), 'w': 'asdf', 't': {'a': [3, 2]}, 'm': "wer"}
+        a = {'x': [1, 2, 3], 'y': 1, 'z': set([1, 2, 3]), 'w': 'qweqwe',
+             't': {'a': [1, 2]}, 'm': [1]}
+        b = {'x': [4, 5, 6], 'y': 4, 'z': set([4, 2, 3]), 'w': 'asdf',
+             't': {'a': [3, 2]}, 'm': "wer"}
         c = merge(a, b)
-        self.assertEqual(c, {'x': [1, 2, 3, 4, 5, 6], 'y': 5, 'z': set([1, 2, 3, 4]), 'w': 'qweqweasdf',
-                             't': {'a': [1, 2, 3, 2]}, 'm': ([1], "wer")}, 'Result:' + str(c))
+        self.assertEqual(c, {'x': [1, 2, 3, 4, 5, 6], 'y': 5,
+                             'z': set([1, 2, 3, 4]), 'w': 'qweqweasdf',
+                             't': {'a': [1, 2, 3, 2]}, 'm': ([1], "wer")},
+                         'Result:' + str(c))
 
     def test_int(self):
         self.assertEqual(merge(1, 2), 3)

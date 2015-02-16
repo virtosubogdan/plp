@@ -15,7 +15,8 @@ def time_slow(*setting_args, **setting_kwargs):
             start = time.time()
             result = func(*args, **kwargs)
             ex_time = time.time() - start
-            msg = 'Function {} with arguments {} {} took {}s to execute'.format(func, args, kwargs, ex_time)
+            msg = 'Function {} with arguments {} {} took {}s to execute'\
+                .format(func, args, kwargs, ex_time)
             if threshold is not 0 and ex_time > threshold:
                 logging.warning(msg)
             else:
@@ -24,8 +25,9 @@ def time_slow(*setting_args, **setting_kwargs):
 
         return func_wrapper
 
-    # TODO: how to make the difference between @time_slow and @time_slow(func) ?
-    if len(setting_args) == 1 and not setting_kwargs and callable(setting_args[0]):
+    # TODO: how to make the difference between @time_slow and @time_slow(func)?
+    if len(setting_args) == 1 and not setting_kwargs and \
+       callable(setting_args[0]):
         return decorator(setting_args[0])
 
     return decorator

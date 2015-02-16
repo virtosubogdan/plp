@@ -1,3 +1,7 @@
+__attr_er_message = 'Value %s does not have correct'\
+                    '<key><whitespace><value> format'
+
+
 def read_dicts(filename):
     with open(filename) as in_file:
         dicts = []
@@ -10,7 +14,7 @@ def read_dicts(filename):
                 try:
                     a, b = line.split(' ')
                 except ValueError:
-                    raise AttributeError('Value ' + line + ' does not have correct <key><whitespace><value> format')
+                    raise AttributeError(__attr_er_message % line)
                 current_dict[a] = int(b)
         if current_dict is not {}:
             dicts.append(current_dict)
@@ -46,7 +50,8 @@ def d_sort(in_filename, out_filename):
     with open(out_filename, 'w') as outFile:
         for item_order in [ordered_dicts.index(x) for x in dicts]:
             if item_order in count_appearances:
-                outFile.write(str(item_order + count_appearances[item_order]) + '\n')
+                outFile.write(str(item_order +
+                                  count_appearances[item_order]) + '\n')
                 count_appearances[item_order] += 1
             else:
                 outFile.write(str(item_order) + '\n')
