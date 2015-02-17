@@ -1,14 +1,13 @@
-__attr_er_message = 'Value %s does not have correct'\
-                    '<key><whitespace><value> format'
-
 # the speedup suggestions should be taken with a grain of salt
 # they're technically correct, but they don't address the root cause of the slowness
 # that's left as an exercise to the reader
 # hint: the exercise talks about the input and output being dictionaries,
 # but doesn't require you use dictionaries to implement
-
-
 from itertools import izip
+
+
+__attr_er_message = 'Value %s does not have correct'\
+                    '<key><whitespace><value> format'
 
 
 def read_dicts(filename):
@@ -98,7 +97,8 @@ def q_sort(l, lo, hi, comparator):
     q_sort(l, index + 1, hi, comparator)
     return l
 
-#%timeit d_sort('res/dict_eq.in','res/dict.out')
+
+# %timeit d_sort('res/dict_eq.in','res/dict.out')
 # 1000 loops, best of 3: 201 us per loop
 # 10000 loops, best of 3: 190 us per loop
 def d_sort(in_filename, out_filename):
@@ -114,6 +114,7 @@ def d_sort(in_filename, out_filename):
             else:
                 outFile.write(str(item_order) + '\n')
                 count_appearances[item_order] = 1
+
 
 # Read the dictionaries in the file as lists with (key, value) items
 # already ordered by key
@@ -136,6 +137,7 @@ def read_as_lists(filename):
             lists.append(current_list)
         return lists
 
+
 # lists have (key,value) pairs and are ordered by key
 def l_compare(list1, list2):
     for (key1, val1), (key2, val2) in izip(list1, list2):
@@ -143,8 +145,9 @@ def l_compare(list1, list2):
             continue
         return val1 > val2
 
-# Tried to improve by using lists with (key,value) items instead of dictionaries
-# so the ordering of the elements can be used.
+
+# Tried to improve by using lists with (key,value) items instead of
+# dictionaries so the ordering of the elements can be used.
 # %timeit d_sort_improved('res/dict_eq.in','res/dict.out')
 # 10000 loops, best of 3: 196 us per loop
 def d_sort_improved(in_filename, out_filename):
