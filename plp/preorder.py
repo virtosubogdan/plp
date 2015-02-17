@@ -68,7 +68,7 @@ class PreOrderIterator(object):
     def next(self):
         if len(self.rest) == 0:
             raise StopIteration
-        root, left, right = self.pop.get()
+        root, left, right = self.rest.pop()
         if root is None:
             raise StopIteration
         if right is not None:

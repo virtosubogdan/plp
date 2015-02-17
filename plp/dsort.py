@@ -98,13 +98,61 @@ def q_sort(l, lo, hi, comparator):
     q_sort(l, index + 1, hi, comparator)
     return l
 
-
+#%timeit d_sort('res/dict_eq.in','res/dict.out')
+# 1000 loops, best of 3: 201 us per loop
+# 10000 loops, best of 3: 190 us per loop
 def d_sort(in_filename, out_filename):
     dicts = read_dicts(in_filename)
     ordered_dicts = q_sort(dicts[:], 0, len(dicts) - 1, d_compare)
     count_appearances = {}
     with open(out_filename, 'w') as outFile:
         for item_order in [ordered_dicts.index(x) for x in dicts]:
+            if item_order in count_appearances:
+                outFile.write(str(item_order +
+                                  count_appearances[item_order]) + '\n')
+                count_appearances[item_order] += 1
+            else:
+                outFile.write(str(item_order) + '\n')
+                count_appearances[item_order] = 1
+
+# Read the dictionaries in the file as lists with (key, value) items
+# already ordered by key
+def read_as_lists(filename):
+    with open(filename) as in_file:
+        lists = []
+        current_list = []
+        for line in in_file:
+            if line.isspace():
+                current_list.sort()
+                lists.append(current_list)
+                current_list = []
+            else:
+                try:
+                    a, b = line.split(' ')
+                except ValueError:
+                    raise AttributeError(__attr_er_message % line)
+                current_list.append((a, int(b)))
+        if current_list != []:
+            lists.append(current_list)
+        return lists
+
+# lists have (key,value) pairs and are ordered by key
+def l_compare(list1, list2):
+    for (key1, val1), (key2, val2) in izip(list1, list2):
+        if val1 == val2:
+            continue
+        return val1 > val2
+
+# Tried to improve by using lists with (key,value) items instead of dictionaries
+# so the ordering of the elements can be used.
+# %timeit d_sort_improved('res/dict_eq.in','res/dict.out')
+# 10000 loops, best of 3: 196 us per loop
+def d_sort_improved(in_filename, out_filename):
+    lists = read_as_lists(in_filename)
+    ordered_lists = q_sort(lists[:], 0, len(lists) - 1, l_compare)
+    count_appearances = {}
+    with open(out_filename, 'w') as outFile:
+        for item_order in [ordered_lists.index(x) for x in lists]:
             if item_order in count_appearances:
                 outFile.write(str(item_order +
                                   count_appearances[item_order]) + '\n')

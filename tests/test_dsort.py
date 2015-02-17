@@ -1,6 +1,6 @@
 import unittest
 
-from plp.dsort import d_sort, q_sort
+from plp.dsort import d_sort_improved as d_sort, q_sort
 
 
 class TestDSort(unittest.TestCase):
