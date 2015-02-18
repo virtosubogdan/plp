@@ -98,9 +98,6 @@ def q_sort(l, lo, hi, comparator):
     return l
 
 
-# %timeit d_sort('res/dict_eq.in','res/dict.out')
-# 1000 loops, best of 3: 201 us per loop
-# 10000 loops, best of 3: 190 us per loop
 def d_sort(in_filename, out_filename):
     dicts = read_dicts(in_filename)
     ordered_dicts = q_sort(dicts[:], 0, len(dicts) - 1, d_compare)
@@ -139,7 +136,14 @@ def read_as_lists(filename):
 
 
 # lists have (key,value) pairs and are ordered by key
-def l_compare(list1, list2):
+# Lists are already sorted, but added the option to compare non sorted lists
+# in order to compare speed
+# Speeup test ../tests/test_dsort.py
+# General speedup with notSorted = True is ~ 4
+def l_compare(list1, list2, notSorted=False):
+    if notSorted:
+        list1.sort()
+        list2.sort()
     for (key1, val1), (key2, val2) in izip(list1, list2):
         if val1 == val2:
             continue
@@ -148,8 +152,6 @@ def l_compare(list1, list2):
 
 # Tried to improve by using lists with (key,value) items instead of
 # dictionaries so the ordering of the elements can be used.
-# %timeit d_sort_improved('res/dict_eq.in','res/dict.out')
-# 10000 loops, best of 3: 196 us per loop
 def d_sort_improved(in_filename, out_filename):
     lists = read_as_lists(in_filename)
     ordered_lists = q_sort(lists[:], 0, len(lists) - 1, l_compare)
